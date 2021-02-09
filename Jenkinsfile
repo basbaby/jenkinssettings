@@ -39,7 +39,7 @@ pipeline {
         stage ('Munit Test'){
         	steps {
 				withCredentials([file(credentialsId: 'settings', variable: 'settings')]){
-					sh "mvn -f pom.xml -s $settings test"
+					sh "mvn -f pom.xml -s $settings test -Dkey=mymulesoft"
 				}
         		   
         	      }    
@@ -47,7 +47,7 @@ pipeline {
         stage('Functional Testing'){
         	steps {
         			withCredentials([file(credentialsId: 'settings', variable: 'settings')]){
-						sh "mvn -f pom.xml -s $settings test -Dtestfile=src/test/javarunner.TestRunner.java"
+						sh "mvn -f pom.xml -s $settings test -Dtestfile=src/test/javarunner.TestRunner.java -Dkey=mymulesoft"
 					}
              	  }
             }
